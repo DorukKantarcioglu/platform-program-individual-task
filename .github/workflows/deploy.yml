@@ -13,10 +13,9 @@ jobs:
 
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@main
-        with:
-          region: eu-central-1  # Replace with your AWS region
-          private_key: ${{ secrets.SSH_KEY }}
-          key_name: SSH_KEY  # Replace with your EC2 key pair name
-          user: ec2_user  # Replace with the username on your EC2 instance (if different)
-          instance_id: i-0d9268f9a3739f492
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
           
