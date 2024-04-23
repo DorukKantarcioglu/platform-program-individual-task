@@ -1,0 +1,27 @@
+name: Deploy Hello World App
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        uses: aws-actions/aws-ec2-deploy-ssh@v1
+        with:
+          region: eu-central-1  # Replace with your AWS region
+          private_key: ${{ secrets.SSH_KEY }}
+          key_name: SSH_KEY  # Replace with your EC2 key pair name
+          user: ec2_user  # Replace with the username on your EC2 instance (if different)
+          instance_id: i-0d9268f9a3739f492
+          
+
+      - name: Test Deployment
+        uses: actions/run@v3
+        run: |  # Multi-line command using run:
+          ssh -i ${{ secrets.SSH_KEY }} ubuntu@3.121.77.150
