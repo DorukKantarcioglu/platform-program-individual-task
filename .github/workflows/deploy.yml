@@ -20,8 +20,3 @@ jobs:
           user: ec2_user  # Replace with the username on your EC2 instance (if different)
           instance_id: i-0d9268f9a3739f492
           
-
-      - name: Test Deployment
-        uses: actions/run@v3
-        run: |  # Multi-line command using run:
-          ssh -i ${{ secrets.SSH_KEY }} ubuntu@3.121.77.150
